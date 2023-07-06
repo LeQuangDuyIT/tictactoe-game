@@ -1,0 +1,57 @@
+.winner-noti__wrap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.winner-noti {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+
+    width: 70%;
+    padding: 60px 30px;
+    border-radius: 20px;
+
+    text-align: center;
+}
+
+.winner-noti img {
+    width: 25%;
+    height: auto;
+}
+.winner-noti p {
+    font-size: 24px;
+}
+.o-winner {
+    background: #C1ECFB;
+}
+.x-winner {
+    background: #FFCAC9;
+}
+.options-btn {
+    display: flex;
+    gap: 5px;
+}
+.options-btn button {
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+
+    font-family: monospace;
+    font-size: 16px;
+}

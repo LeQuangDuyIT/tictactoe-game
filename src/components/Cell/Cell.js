@@ -1,3 +1,4 @@
+import { playerIcon } from '../../utils/constants';
 import './Cell.css';
 
 const Cell = props => {
@@ -17,8 +18,8 @@ const Cell = props => {
 
         <div className="cell__wrap" style={cellStyle}>
             <div className="cell__core" onClick={onCheckedCell}>
-                {checked === 'X' && <img src="/assets/x-player.png" alt="X" />}
-                {checked === 'O' && <img src="/assets/o-player.png" alt="O" />}
+                {checked === 'X' && <img src={playerIcon.xPlayer} alt="X" />}
+                {checked === 'O' && <img src={playerIcon.oPlayer} alt="O" />}
             </div>
         </div>
     );
