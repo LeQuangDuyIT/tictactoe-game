@@ -1,0 +1,10 @@
+.game-board{
+    display: flex;
+    flex-wrap: wrap;
+
+    width: 70vh;
+    height: 70vh;
+    padding: .5px;
+
+    background: black;
+}
