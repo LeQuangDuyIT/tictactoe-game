@@ -42,6 +42,12 @@
 .x-winner {
     background: #FFCAC9;
 }
+.xo-winner {
+    display: flex;
+    justify-content: center;
+
+    background: white;
+}
 .options-btn {
     display: flex;
     gap: 5px;

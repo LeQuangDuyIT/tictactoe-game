@@ -27,8 +27,8 @@ export const gameModes = [
         edgeLength: 12,
         lineLength: 5,
         img: '/assets/12x12.png'
-    },
-]
+    }
+];
 
 export const getInitialGameBoard = edgeLength => {
     let matrix = [];
@@ -77,10 +77,15 @@ export const getWinner = (justCheckedId, matrix, lineLength) => {
     }
 
     for (let i = 1; i <= lineLength; i++) {
-        const nextCell = matrix.filter(
+        let nextCell = matrix.filter(
             cellObj => Math.abs(cellObj.x - x) === i && Math.abs(cellObj.y - y) === i && cellObj.checked === checked
         );
         if (nextCell.length > 0) {
+            // nextCell = nextCell.filter(cellObj => {
+            //     const isSameX = nextCell.findIndex(cell => cell.x === cellObj.x && cell.index !==cellObj.index);
+            //     const notSameY = !nextCell.findIndex(cell => cell.y === cellObj.y && cell.index !==cellObj.index);
+            //     return notSameX && notSameY;
+            // });
             diagonalLine = [...diagonalLine, ...nextCell];
             if (diagonalLine.length >= lineLength) {
                 winLine = diagonalLine;

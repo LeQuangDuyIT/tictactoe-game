@@ -8,7 +8,6 @@ import Header from './components/Header/Header';
 import WinnerNoti from './components/WinnerNoti/WinnerNoti';
 
 function App() {
-    // const InitialGameBoard = getInitialGameBoard(edgeLength);
     const [gameMode, setGameMode] = useState(null);
     const [playingGame, setPlayingGame] = useState(false);
     const [gaming, setGaming] = useState([]);
@@ -34,10 +33,17 @@ function App() {
 
             const lineLength = gameMode.lineLength;
             const winnerLine = getWinner(cellIndex, newGaming, lineLength);
+            console.log(winnerLine);
+
+            const isFull = newGaming.every(cellObj => cellObj.checked);
 
             if (winnerLine) {
                 setWinner(winnerLine[0].checked);
                 setShowNoti(true);
+            } else if (isFull) {
+                setWinner('XO');
+                setShowNoti(true);
+                console.log('Hòa');
             } else {
                 setPlayer(player === 'O' ? 'X' : 'O');
                 setTimeCountDown(30000);
@@ -56,6 +62,7 @@ function App() {
                 clearInterval(intervalId);
                 const remainingPlayer = player === 'O' ? 'X' : 'O';
                 setWinner(remainingPlayer);
+                setShowNoti(true);
             }
         }
         return () => {
@@ -80,7 +87,13 @@ function App() {
 
     return (
         <div className="App">
-            <Header player={player} winner={winner} timeCountDown={timeCountDown} handleNewGame={handleNewGame} />
+            <Header
+                player={player}
+                playingGame={playingGame}
+                winner={winner}
+                timeCountDown={timeCountDown}
+                handleNewGame={handleNewGame}
+            />
             {playingGame ? (
                 <>
                     <GameBoard>
@@ -100,6 +113,7 @@ function App() {
             ) : (
                 <Home handlePlayingGame={handlePlayingGame} />
             )}
+            {playingGame && <div className="line-length">Place {gameMode.lineLength} in a row to win</div>}
         </div>
     );
 }

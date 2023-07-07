@@ -3,17 +3,17 @@ import { gameModes } from '../../utils/constants';
 import './Home.css';
 
 const Home = props => {
-    const [mode, setMode] = useState(null);
+    const [mode, setMode] = useState('3x3');
     const { handlePlayingGame } = props;
 
     return (
         <div className="home">
             <div className="game-modes">
-                {gameModes.map(mode => (
-                    <div className="mode-option__wrap">
-                        <div key={mode.mode} className="mode-option" onClick={() => setMode(mode.mode)}>
-                            <img src={mode.img} alt={mode.mode} />
-                            <h3>{mode.mode}</h3>
+                {gameModes.map(modeObj => (
+                    <div key={modeObj.mode} className="mode-option__wrap">
+                        <div className={`mode-option ${modeObj.mode === mode ? 'mode-checked' : ''}`} onClick={() => setMode(modeObj.mode)}>
+                            <img src={modeObj.img} alt={modeObj.mode} />
+                            <h3>{modeObj.mode}</h3>
                         </div>
                     </div>
                 ))}

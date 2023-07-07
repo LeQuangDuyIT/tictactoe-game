@@ -7,10 +7,17 @@ const WinnerNoti = props => {
     console.log(winner);
     return (
         <div className="winner-noti__wrap">
-            <div className={`winner-noti ${winner === 'O' ? 'o-winner' : winner === 'X' ? 'x-winner' : ''}`}>
+            <div className={`winner-noti ${winner === 'O' ? 'o-winner' : winner === 'X' ? 'x-winner' : 'xo-winner'}`}>
                 {winner === 'O' && <img src={playerIcon.oPlayer} alt="O" />}
                 {winner === 'X' && <img src={playerIcon.xPlayer} alt="X" />}
-                <p>Congrats to the winner!</p>
+                {winner === 'XO' && (
+                    <div className="xo-winner">
+                        <img src={playerIcon.oPlayer} alt="O" />
+                        <img src={playerIcon.xPlayer} alt="X" />
+                    </div>
+                )}
+                {winner === 'XO' ? <p>There is no winner</p> : <p>Congrats to the winner!</p>}
+
                 <div className="options-btn">
                     <button onClick={handleReview}>Review</button>
                     <button onClick={handleNewGame}>New Game</button>

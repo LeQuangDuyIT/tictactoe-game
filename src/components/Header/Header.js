@@ -4,7 +4,7 @@ import { playerIcon } from '../../utils/constants';
 import TimeDownLine from '../TimeDownLine/TimeDownLine';
 
 const Header = props => {
-    const { player, winner, timeCountDown, handleNewGame } = props;
+    const { playingGame, player, winner, timeCountDown, handleNewGame } = props;
     return (
         <div className="header">
             <div className="top-bar">
@@ -14,20 +14,28 @@ const Header = props => {
                     <p>New Game</p>
                 </button>
             </div>
-            <div className="player-space">
-                {player === 'O' && (
-                    <>
+            {playingGame ? (
+                <div className="player-space">
+                    {player === 'O' && (
+                        <>
+                            <img src={playerIcon.oPlayer} alt="O" />
+                            <h1 className="o-player">Player 1 to move</h1>
+                        </>
+                    )}
+                    {player === 'X' && (
+                        <>
+                            <img src={playerIcon.xPlayer} alt="X" />
+                            <h1 className="x-player">Player 2 to move</h1>
+                        </>
+                    )}
+                </div>
+            ) : (
+                    <div className='o__vs__x'>
                         <img src={playerIcon.oPlayer} alt="O" />
-                        <h1 className="o-player">Player 1 to move</h1>
-                    </>
-                )}
-                {player === 'X' && (
-                    <>
+                        <p>vs</p>
                         <img src={playerIcon.xPlayer} alt="X" />
-                        <h1 className="x-player">Player 2 to move</h1>
-                    </>
-                )}
-            </div>
+                    </div>
+            )}
             <TimeDownLine player={player} winner={winner} timeCountDown={timeCountDown} />
         </div>
     );
