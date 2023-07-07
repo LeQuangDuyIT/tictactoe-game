@@ -3,6 +3,33 @@ export const playerIcon = {
     xPlayer: '/assets/x-player.png'
 };
 
+export const gameModes = [
+    {
+        mode: '3x3',
+        edgeLength: 3,
+        lineLength: 3,
+        img: '/assets/3x3.png'
+    },
+    {
+        mode: '5x5',
+        edgeLength: 5,
+        lineLength: 4,
+        img: '/assets/5x5.png'
+    },
+    {
+        mode: '7x7',
+        edgeLength: 7,
+        lineLength: 4,
+        img: '/assets/7x7.png'
+    },
+    {
+        mode: '12x12',
+        edgeLength: 12,
+        lineLength: 5,
+        img: '/assets/12x12.png'
+    },
+]
+
 export const getInitialGameBoard = edgeLength => {
     let matrix = [];
     let index = 1;
@@ -16,7 +43,7 @@ export const getInitialGameBoard = edgeLength => {
     return matrix;
 };
 
-export const getWinner = (justCheckedId, matrix) => {
+export const getWinner = (justCheckedId, matrix, lineLength) => {
     const cellJustChecked = matrix.find(cellObj => cellObj.index === justCheckedId);
     const { x, y, checked } = cellJustChecked;
 
@@ -25,43 +52,43 @@ export const getWinner = (justCheckedId, matrix) => {
     let verticalLine = [cellJustChecked];
     let diagonalLine = [cellJustChecked];
 
-    for (let i = 1; i <= 5; i++) {
+    for (let i = 1; i <= lineLength; i++) {
         const nextCell = matrix.filter(
             cellObj => cellObj.y === y && Math.abs(cellObj.x - x) === i && cellObj.checked === checked
         );
         if (nextCell.length > 0) {
             horizontalLine = [...horizontalLine, ...nextCell];
-            if (horizontalLine.length >= 5) {
+            if (horizontalLine.length >= lineLength) {
                 winLine = horizontalLine;
             }
         } else break;
     }
 
-    for (let i = 1; i <= 5; i++) {
+    for (let i = 1; i <= lineLength; i++) {
         const nextCell = matrix.filter(
             cellObj => cellObj.x === x && Math.abs(cellObj.y - y) === i && cellObj.checked === checked
         );
         if (nextCell.length > 0) {
             verticalLine = [...verticalLine, ...nextCell];
-            if (verticalLine.length >= 5) {
+            if (verticalLine.length >= lineLength) {
                 winLine = verticalLine;
             }
         } else break;
     }
 
-    for (let i = 1; i <= 5; i++) {
+    for (let i = 1; i <= lineLength; i++) {
         const nextCell = matrix.filter(
             cellObj => Math.abs(cellObj.x - x) === i && Math.abs(cellObj.y - y) === i && cellObj.checked === checked
         );
         if (nextCell.length > 0) {
             diagonalLine = [...diagonalLine, ...nextCell];
-            if (diagonalLine.length >= 5) {
+            if (diagonalLine.length >= lineLength) {
                 winLine = diagonalLine;
             }
         } else break;
     }
 
-    if (winLine && winLine.length === 5) {
+    if (winLine && winLine.length === lineLength) {
         winLine = winLine.sort((cellObj, nextCellObj) => cellObj.index - nextCellObj.index);
         return winLine;
     }
