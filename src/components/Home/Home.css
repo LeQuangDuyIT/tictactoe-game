@@ -26,10 +26,10 @@
     background: white;
 }
 .mode-option:hover {
-    background: linear-gradient(-225deg, #ffcac9, #fff, #c1ecfb);
+    background: rgba(0, 0, 0, .05);
 }
 .mode-checked {
-    background: linear-gradient(-225deg, #ff615f, #fff, #3ec5f3);
+    background: rgba(0, 0, 0, .1);
 }
 .mode-option img {
     width: 100%;
@@ -48,12 +48,11 @@
     border: none;
     cursor: pointer;
 
-    background: linear-gradient(-225deg, #ffcac9, #fff, #c1ecfb);
+    color: white;
 
     font-family: monospace;
     font-size: 24px;
 }
 .playing-game-btn:hover {
-    background: linear-gradient(-225deg, #ff615f, #fff, #3ec5f3);
-    box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.1), 0 2px 15px 0 rgba(0, 0, 0, 0.05);
+    opacity: .7;
 }

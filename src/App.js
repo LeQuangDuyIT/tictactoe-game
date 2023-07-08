@@ -110,7 +110,7 @@ function App() {
                     )}
                 </>
             ) : (
-                <Home handlePlayingGame={handlePlayingGame} />
+                    <Home player={player} handlePlayingGame={handlePlayingGame} />
             )}
             {playingGame && <div className="line-length">Place {gameMode.lineLength} in a row to win</div>}
         </div>
