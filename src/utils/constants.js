@@ -50,7 +50,8 @@ export const getWinner = (justCheckedId, matrix, lineLength) => {
     let winLine = null;
     let horizontalLine = [cellJustChecked];
     let verticalLine = [cellJustChecked];
-    let diagonalLine = [cellJustChecked];
+    let diagonalUpLine = [cellJustChecked];
+    let diagonalDownLine = [cellJustChecked];
 
     for (let i = 1; i <= lineLength; i++) {
         const nextCell = matrix.filter(
@@ -78,17 +79,32 @@ export const getWinner = (justCheckedId, matrix, lineLength) => {
 
     for (let i = 1; i <= lineLength; i++) {
         let nextCell = matrix.filter(
-            cellObj => Math.abs(cellObj.x - x) === i && Math.abs(cellObj.y - y) === i && cellObj.checked === checked
+            cellObj =>
+                Math.abs(cellObj.x - x) === i &&
+                Math.abs(cellObj.y - y) === i &&
+                ((cellObj.x < x && cellObj.y < y) || (cellObj.x > x && cellObj.y > y)) &&
+                cellObj.checked === checked
         );
         if (nextCell.length > 0) {
-            // nextCell = nextCell.filter(cellObj => {
-            //     const isSameX = nextCell.findIndex(cell => cell.x === cellObj.x && cell.index !==cellObj.index);
-            //     const notSameY = !nextCell.findIndex(cell => cell.y === cellObj.y && cell.index !==cellObj.index);
-            //     return notSameX && notSameY;
-            // });
-            diagonalLine = [...diagonalLine, ...nextCell];
-            if (diagonalLine.length >= lineLength) {
-                winLine = diagonalLine;
+            diagonalUpLine = [...diagonalUpLine, ...nextCell];
+            if (diagonalUpLine.length >= lineLength) {
+                winLine = diagonalUpLine;
+            }
+        } else break;
+    }
+
+    for (let i = 1; i <= lineLength; i++) {
+        let nextCell = matrix.filter(
+            cellObj =>
+                Math.abs(cellObj.x - x) === i &&
+                Math.abs(cellObj.y - y) === i &&
+                ((cellObj.x < x && cellObj.y > y) || (cellObj.x > x && cellObj.y < y)) &&
+                cellObj.checked === checked
+        );
+        if (nextCell.length > 0) {
+            diagonalDownLine = [...diagonalDownLine, ...nextCell];
+            if (diagonalDownLine.length >= lineLength) {
+                winLine = diagonalDownLine;
             }
         } else break;
     }
