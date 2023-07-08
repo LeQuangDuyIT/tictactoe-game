@@ -43,7 +43,6 @@ function App() {
             } else if (isFull) {
                 setWinner('XO');
                 setShowNoti(true);
-                console.log('Hòa');
             } else {
                 setPlayer(player === 'O' ? 'X' : 'O');
                 setTimeCountDown(30000);
